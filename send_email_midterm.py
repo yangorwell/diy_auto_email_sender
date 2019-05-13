@@ -37,8 +37,8 @@ with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
     print()
     server.login(sender_email, password)
     for [a,b,c] in table.iter_rows(min_row=2):
-        content = """{name}同学，您好。您的期中考试成绩是{grade}。本次期中考试成绩均值82.33，中位数84。如有疑问，请联系对应的助教或授课老师咨询。
-国发院春概统助教组敬上
+        content = """{name}同学，您好。您的期中考试成绩是{grade}。本次期中考试成绩均值**，中位数**。如有疑问，请联系对应的助教或授课老师咨询。
+**助教组敬上
 (请勿回复本邮箱，邮件为自动发送)
     """
         num = num + 1
