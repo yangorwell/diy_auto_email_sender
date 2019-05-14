@@ -26,21 +26,24 @@ port = 465
 smtp_server = args.send_server
 sender_email = args.sender_email
 
-password = input('Please input your email password!')
+password = input('please input your password')
 
 successful_receiver = []
 unsuccessful_receiver = []
 
 num  = 0
 context = ssl.create_default_context()
-with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+for [a,b,c] in table.iter_rows(min_row=2):
     print()
-    server.login(sender_email, password)
-    for [a,b,c] in table.iter_rows(min_row=2):
-        content = """{name}同学，您好。您的期中考试成绩是{grade}。本次期中考试成绩均值**，中位数**。如有疑问，请联系对应的助教或授课老师咨询。
-**助教组敬上
+    # server.login(sender_email, password)
+    
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        content = """{name}同学，您好。如您对本次期中考试成绩有疑问，请回复此邮件。
+国发院春概统助教组敬上
 (请勿回复本邮箱，邮件为自动发送)
     """
+        server.connect(smtp_server)
+        server.login(sender_email, password)
         num = num + 1
         print("Sending email to %d th student, his/her email is %s ....." %(num,c.value))
         # print(content.format(name=a.value,grade=b.value))
@@ -52,6 +55,7 @@ with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
         
         try:
             server.sendmail(sender_email, c.value, message.as_string())
+
             print('mail has been send successfully.')
             successful_receiver.append([a.value,c.value])
         except smtplib.SMTPException as e:
