@@ -38,8 +38,7 @@ for [a,b,c] in table.iter_rows(min_row=2):
     # server.login(sender_email, password)
     
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-        content = """{name}同学，您好。如您对本次期中考试成绩有疑问，请回复此邮件。
-国发院春概统助教组敬上
+        content = """{name}同学，您好。
 (请勿回复本邮箱，邮件为自动发送)
     """
         server.connect(smtp_server)
