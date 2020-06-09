@@ -47,7 +47,7 @@ for [a,b,c] in table.iter_rows(min_row=2):
         print("Sending email to %d th student, his/her email is %s ....." %(num,c.value))
         # print(content.format(name=a.value,grade=b.value))
         message = MIMEText(content.format(name=a.value,grade=b.value),'plain','utf-8')
-        message['Subject'] = '国发院概率统计期中成绩分数{}'.format(b.value)
+        message['Subject'] = '期中成绩分数{}'.format(b.value)
         message['From'] = sender_email+'<'+sender_email+'>'
         message['To'] = c.value+'<'+c.value+'>'
 
